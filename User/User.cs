@@ -1,8 +1,16 @@
 ﻿namespace ConsoleApp1.User;
 
-public abstract class User(string firstName, string lastName)
+public class User
 {
-    public string FirstName { get; } = firstName;
-    public string LastName { get; } = lastName;
+    private static int _idGenerator = 0;
+    public int Id { get; }
+    public string FirstName { get; }
+    public string LastName { get; }
+    User(string firstName, string lastName)
+    {
+        Id = ++_idGenerator;
+        FirstName = firstName;
+        LastName = lastName;
+    }
     
 }
