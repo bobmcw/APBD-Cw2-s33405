@@ -2,7 +2,7 @@
 
 public abstract class User(string firstName, string lastName)
 {
-    public string _firstName { get; } = firstName;
-    public string _lastName { get; } = lastName;
+    public string FirstName { get; } = firstName;
+    public string LastName { get; } = lastName;
     
 }

@@ -1,6 +1,6 @@
-﻿namespace ConsoleApp1;
+﻿namespace ConsoleApp1.Device;
 
-public class Camera : Device
+public class Camera : IDevice
 {
     
 }

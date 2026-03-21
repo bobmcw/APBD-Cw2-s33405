@@ -1,6 +1,6 @@
-﻿namespace ConsoleApp1;
+﻿namespace ConsoleApp1.Device;
 
-public class Laptop : Device
+public class Laptop : IDevice
 {
     
 }
