@@ -6,4 +6,9 @@ public class EmployeeTier : IUserType
     {
         return 5;
     }
+
+    public string get_type()
+    {
+        return "Employee";
+    }
 }

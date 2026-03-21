@@ -6,4 +6,9 @@ public class StudentTier : IUserType
     {
         return 3;
     }
+
+    public string get_type()
+    {
+        return "Student";
+    }
 }
