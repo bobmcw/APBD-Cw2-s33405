@@ -6,11 +6,13 @@ public class User
     public int Id { get; }
     public string FirstName { get; }
     public string LastName { get; }
-    User(string firstName, string lastName)
+    private IUserType _type;
+    User(string firstName, string lastName, IUserType type)
     {
         Id = ++_idGenerator;
         FirstName = firstName;
         LastName = lastName;
+        _type = type;
     }
     
 }
