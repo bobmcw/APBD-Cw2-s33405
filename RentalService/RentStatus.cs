@@ -13,12 +13,14 @@ public class RentStatus
     private DateTime _declaredReturnDate;
     private DateTime _returnDate;
     private User.User? _user;
+    private Device.Device? _device;
     private State _state = State.Available;
 
-    void rentDevice(User.User user, DateTime returnDate)
+    public RentStatus(User.User user, Device.Device device,DateTime returnDate)
     {
         if (_state == State.Available)
         {
+            _device = device;
             _state = State.Rented;
             _start = DateTime.Now;
             _user = user;
@@ -30,7 +32,7 @@ public class RentStatus
         }
     }
     
-    void returnDevice()
+    public void returnDevice()
     {
         _state = State.Returned;
         _returnDate = DateTime.Now;
