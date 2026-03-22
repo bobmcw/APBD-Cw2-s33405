@@ -31,6 +31,16 @@ public class RentStatus
             throw new Exception("device is not available");
         }
     }
+
+    public int DeviceId()
+    {
+        if (_device != null)
+        {
+            return _device.Id;
+        }
+
+        throw new Exception("this rent status does not have a device");
+    }
     
     public void returnDevice()
     {
