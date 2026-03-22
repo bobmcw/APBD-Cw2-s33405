@@ -7,7 +7,7 @@ public class User
     public string FirstName { get; }
     public string LastName { get; }
     private IUserType _type;
-    User(string firstName, string lastName, IUserType type)
+    public User(string firstName, string lastName, IUserType type)
     {
         Id = ++_idGenerator;
         FirstName = firstName;
