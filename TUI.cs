@@ -30,7 +30,7 @@ public class Tui
         }
 
         var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
-        var usr = new User.User(fname, lname, tierList[key - 1]);
+        var usr = new User.User(fname ?? throw new InvalidOperationException(), lname ?? throw new InvalidOperationException(), tierList[key - 1]);
         _users.Add(usr);
         Console.Clear();
         Console.WriteLine("added user: " + usr);
@@ -106,7 +106,7 @@ public class Tui
             Console.WriteLine("device rented");
             Console.ReadKey();
         }
-        catch (Exception _)
+        catch (Exception)
         {
             Console.Error.WriteLine("device is already rented");
             Console.ReadKey();
