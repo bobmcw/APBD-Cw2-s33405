@@ -1,17 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using ConsoleApp1;
 using ConsoleApp1.Device;
 using ConsoleApp1.RentalService;
 using ConsoleApp1.User;
 
 Console.WriteLine("Hello, World!");
 
-var usr = new User("Bob", "Smith", new StudentTier());
-var service = new RentalService();
-service.AddDeviceToInventory(new Projector(1920, 1080, "Epson"));
-Console.WriteLine(service.Inventory);
-service.RentDevice(1, usr, new DateTime(2026, 6, 12));
-Console.WriteLine(service.CurrentRents);
-service.ReturnDevice(1);
-Console.WriteLine(service.History);
+var serv = new RentalService();
+serv.AddDeviceToInventory(new Projector(3440, 1440, "Dell"));
+serv.AddDeviceToInventory(new Laptop("Intel", "Linux", "Lenovo"));
+serv.AddDeviceToInventory(new Camera(1000, 140, "Sony"));
 
+var tui = new Tui(serv);
+
+tui.InsertUser("Bob", "Kowalski", new EmployeeTier());
+tui.InsertUser("Michal", "Studencki", new StudentTier());
+
+tui.Start();

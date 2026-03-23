@@ -3,11 +3,15 @@ using ConsoleApp1.User;
 
 namespace ConsoleApp1;
 
-public class Tui
+public class Tui(RentalService.RentalService service)
 {
-    private RentalService.RentalService _service = new RentalService.RentalService();
-    private List<User.User> _users = new List<User.User>();
+    private RentalService.RentalService _service = service;
+    private List<User.User> _users = new();
 
+    public void InsertUser(string fname, string lname, IUserType type)
+    {
+        _users.Add(new User.User(fname, lname, type));
+    }
     private void _addUserForm()
     {
         Console.Clear();
