@@ -47,4 +47,9 @@ public class RentStatus
         _state = State.Returned;
         _returnDate = DateTime.Now;
     }
+
+    public override string ToString()
+    {
+        return _device + _state.ToString();
+    }
 }
