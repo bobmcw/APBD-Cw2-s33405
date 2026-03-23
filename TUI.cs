@@ -36,6 +36,36 @@ public class Tui
 
     }
 
+    private void _addDeviceForm()
+    {
+        var typeList = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => typeof(Device.Device).IsAssignableFrom(t) && !t.IsAbstract)
+            .Select(t => (Device.Device)Activator.CreateInstance(t)!).ToList();
+        Console.WriteLine("select device type:");
+        int count = 1;
+        foreach (var type in typeList)
+        {
+            Console.WriteLine(count++ + " " + type.get_type()); 
+        }
+
+        var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        var ctor = typeList[key - 1].GetType().GetConstructors().FirstOrDefault()!;
+        ParameterInfo[] parameters = ctor.GetParameters();
+        object[] args = new object[parameters.Length];
+        
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            Console.Write($"Enter value for {parameters[i].Name} ({parameters[i].ParameterType.Name}): ");
+            string input = Console.ReadLine() ?? throw new InvalidOperationException();
+
+            args[i] = Convert.ChangeType(input, parameters[i].ParameterType) ?? throw new InvalidOperationException();
+        }
+
+        var dev = (Device.Device) ctor.Invoke(args);
+        _service.AddDeviceToInventory(dev);
+        Console.WriteLine("added device: " + dev);
+        
+    }
     
     public void Start()
     {
@@ -52,6 +82,7 @@ public class Tui
                    _addUserForm();
                    break;
                case '2':
+                   _addDeviceForm();
                    break;
                case '3':
                    break;
