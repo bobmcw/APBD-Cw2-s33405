@@ -32,12 +32,15 @@ public class Tui
         var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
         var usr = new User.User(fname, lname, tierList[key - 1]);
         _users.Add(usr);
+        Console.Clear();
         Console.WriteLine("added user: " + usr);
+        Console.ReadKey();
 
     }
 
     private void _addDeviceForm()
     {
+        Console.Clear();
         var typeList = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(Device.Device).IsAssignableFrom(t) && !t.IsAbstract)
             .Select(t => (Device.Device)Activator.CreateInstance(t)!).ToList();
@@ -49,6 +52,7 @@ public class Tui
         }
 
         var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        Console.Clear();
         var ctor = typeList[key - 1].GetType().GetConstructors().FirstOrDefault()!;
         ParameterInfo[] parameters = ctor.GetParameters();
         object[] args = new object[parameters.Length];
@@ -63,12 +67,15 @@ public class Tui
 
         var dev = (Device.Device) ctor.Invoke(args);
         _service.AddDeviceToInventory(dev);
+        Console.Clear();
         Console.WriteLine("added device: " + dev);
-        
+        Console.ReadKey();
+
     }
 
     private void _rentForm()
     {
+        Console.Clear();
         if (_users.Count == 0)
         {
             Console.WriteLine("no users");
@@ -91,10 +98,13 @@ public class Tui
             Console.WriteLine(count++ + ". " + device); 
         }
         key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        Console.Clear();
         var devId = _service.Inventory[key - 1].Id;
         try
         {
             _service.RentDevice(devId, usr, new DateTime(2026, 10, 23));
+            Console.WriteLine("device rented");
+            Console.ReadKey();
         }
         catch (Exception _)
         {
@@ -106,7 +116,8 @@ public class Tui
     public void Start()
     {
         while (true)
-        {
+        { 
+           Console.Clear();
            Console.WriteLine("Select option"); 
            Console.WriteLine("1. add new user"); 
            Console.WriteLine("2. add new device"); 
