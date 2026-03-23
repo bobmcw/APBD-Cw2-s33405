@@ -112,6 +112,38 @@ public class Tui
             Console.ReadKey();
         }
     }
+
+    private void _returnForm()
+    {
+       Console.Clear();
+       Console.WriteLine("return for which user?");
+       int i = 1;
+       foreach (var usr in _users)
+       {
+          Console.WriteLine(i++ + ". " + usr); 
+       }
+       var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+       var user = _users[key - 1];
+       var rents = _service.CurrentRents.Where(i => i.UserId() == user.Id).ToList();
+       if (rents.Count == 0)
+       {
+           Console.Error.WriteLine("no rents for this user");
+           Console.ReadKey();
+           return;
+       }
+        Console.Clear();
+        Console.WriteLine("Which item to return?");
+        i = 1;
+       foreach (var rent in rents)
+       {
+          Console.WriteLine(i++ + ". " + rent.User + " " + rent.Device); 
+       }
+       key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+       var id = rents[key - 1].DeviceId();
+       _service.ReturnDevice(id);
+       Console.WriteLine("device returned");
+       Console.ReadKey();
+    }
     
     public void Start()
     {
@@ -122,6 +154,7 @@ public class Tui
            Console.WriteLine("1. add new user"); 
            Console.WriteLine("2. add new device"); 
            Console.WriteLine("3. make a new rent");
+           Console.WriteLine("4. return an item");
            var key = Console.ReadKey();
            switch (key.KeyChar)
            {
@@ -133,6 +166,9 @@ public class Tui
                    break;
                case '3':
                    _rentForm();
+                   break;
+               case '4':
+                   _returnForm();
                    break;
                default:
                    Console.Error.WriteLine("Invalid option");
