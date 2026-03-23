@@ -66,6 +66,42 @@ public class Tui
         Console.WriteLine("added device: " + dev);
         
     }
+
+    private void _rentForm()
+    {
+        if (_users.Count == 0)
+        {
+            Console.WriteLine("no users");
+            return;
+        }
+        Console.WriteLine("which user to make a rent for");
+        int count = 1;
+        foreach (var tmpusr in _users)
+        {
+           Console.WriteLine(count++ + ". " + tmpusr); 
+        }
+        var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        var usr = _users[key - 1];
+        
+        Console.Clear();
+        Console.WriteLine("which device to rent?");
+        count = 1;
+        foreach (var device in _service.Inventory)
+        {
+            Console.WriteLine(count++ + ". " + device); 
+        }
+        key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        var devId = _service.Inventory[key - 1].Id;
+        try
+        {
+            _service.RentDevice(devId, usr, new DateTime(2026, 10, 23));
+        }
+        catch (Exception _)
+        {
+            Console.Error.WriteLine("device is already rented");
+            Console.ReadKey();
+        }
+    }
     
     public void Start()
     {
@@ -85,6 +121,7 @@ public class Tui
                    _addDeviceForm();
                    break;
                case '3':
+                   _rentForm();
                    break;
                default:
                    Console.Error.WriteLine("Invalid option");
