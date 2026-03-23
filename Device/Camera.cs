@@ -8,7 +8,7 @@ public class Camera(int cost, int megaPixels, string make) : Device
 
     public override string ToString()
     {
-        return base.ToString() + Cost + " " + Make + " " + megaPixels;
+        return base.ToString() + Cost + " " + Make + " " + MegaPixels;
     }
 
     public override string get_type()

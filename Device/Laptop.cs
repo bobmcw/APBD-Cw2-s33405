@@ -11,7 +11,7 @@ public class Laptop(string cpu, string os, string make) : Device
     }
     public override string ToString()
     {
-        return base.ToString() + " " + Make + " " + cpu + " " + os;
+        return base.ToString() + " " + Make + " " + Cpu + " " + Os;
     }
 
     public Laptop() : this("", "", "") {}
