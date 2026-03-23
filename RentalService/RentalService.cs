@@ -17,6 +17,10 @@ public class RentalService
         var items = Inventory.Where(i => i.Id == id).ToList();
         if (items.Count == 1)
         {
+            if (CurrentRents.Where(i => i.DeviceId() == id).ToList().Count != 0)
+            {
+                throw new Exception("device is already rented");
+            }
             var dev = items.First();
             CurrentRents.Add(new RentStatus(user, dev, returnDate));
         }
