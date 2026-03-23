@@ -6,4 +6,8 @@ public class Projector(int resolutionX, int resolutionY, string make) : Device
     public int ResolutionY { get; } = resolutionY;
     public string Make { get; } = make;
 
+    public override string ToString()
+    {
+        return base.ToString() + " " + Make + " " + ResolutionX + "x" + ResolutionY;
+    }
 }

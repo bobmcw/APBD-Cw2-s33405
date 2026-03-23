@@ -8,5 +8,9 @@ public abstract class Device
     {
         this.Id = ++_idGenerator;
     }
-    
+
+    public override string ToString()
+    {
+        return "" + Id;
+    }
 }
