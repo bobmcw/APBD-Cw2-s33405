@@ -5,4 +5,14 @@ public class Laptop(string cpu, string os, string make) : Device
     public string Cpu { get; } = cpu;
     public string Os { get; } = os;
     public string Make { get; } = make;
+    public override string get_type()
+    {
+        return "Laptop";
+    }
+    public override string ToString()
+    {
+        return base.ToString() + " " + Make + " " + cpu + " " + os;
+    }
+
+    public Laptop() : this("", "", "") {}
 }

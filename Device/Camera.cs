@@ -10,4 +10,11 @@ public class Camera(int cost, int megaPixels, string make) : Device
     {
         return base.ToString() + Cost + " " + Make + " " + megaPixels;
     }
+
+    public override string get_type()
+    {
+        return "Camera";
+    }
+
+    public Camera() : this(0, 0, "") {}
 }

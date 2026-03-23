@@ -10,4 +10,11 @@ public class Projector(int resolutionX, int resolutionY, string make) : Device
     {
         return base.ToString() + " " + Make + " " + ResolutionX + "x" + ResolutionY;
     }
+
+    public override string get_type()
+    {
+        return "Projector";
+    }
+
+    public Projector() : this(0,0,"") {}
 }

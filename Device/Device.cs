@@ -4,7 +4,7 @@ public abstract class Device
 {
     public int Id { get; }
     private static int _idGenerator = 0;
-    protected Device()
+    public Device()
     {
         this.Id = ++_idGenerator;
     }
@@ -13,4 +13,6 @@ public abstract class Device
     {
         return "" + Id;
     }
+
+    public abstract string get_type();
 }
