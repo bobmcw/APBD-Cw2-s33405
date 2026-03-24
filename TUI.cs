@@ -144,6 +144,30 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
        Console.WriteLine("device returned");
        Console.ReadKey();
     }
+
+    private void _displayInventoryStatus()
+    {
+        Console.Clear();
+        List<int> rentedIds = new List<int>();
+        foreach (var rent in _service.CurrentRents)
+        {
+           rentedIds.Add(rent.DeviceId()); 
+        }
+
+        foreach (var dev in _service.Inventory)
+        {
+            Console.Write(dev);
+            if (rentedIds.Contains(dev.Id))
+            {
+               Console.Write(" rented\n"); 
+            }
+            else
+            {
+               Console.Write(" available\n"); 
+            }
+        }
+        Console.ReadKey();
+    }
     
     public void Start()
     {
@@ -155,6 +179,7 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
            Console.WriteLine("2. add new device"); 
            Console.WriteLine("3. make a new rent");
            Console.WriteLine("4. return an item");
+           Console.WriteLine("5. display inventory status");
            var key = Console.ReadKey();
            switch (key.KeyChar)
            {
@@ -169,6 +194,9 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
                    break;
                case '4':
                    _returnForm();
+                   break;
+               case '5':
+                   _displayInventoryStatus();
                    break;
                default:
                    Console.Error.WriteLine("Invalid option");
