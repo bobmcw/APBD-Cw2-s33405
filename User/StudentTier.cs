@@ -4,7 +4,7 @@ public class StudentTier : IUserType
 {
     public int max_rentals()
     {
-        return 3;
+        return 2;
     }
 
     public string get_type()
