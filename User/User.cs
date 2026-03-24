@@ -15,6 +15,11 @@ public class User
         _type = type;
     }
 
+    public int MaxRents()
+    {
+        return _type.max_rentals();
+    }
+    
     public override string ToString()
     {
         return FirstName + " " + LastName;
