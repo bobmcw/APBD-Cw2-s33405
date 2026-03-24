@@ -147,6 +147,7 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
        key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
        var id = rents[key - 1].DeviceId();
        _service.ReturnDevice(id);
+       Console.Clear();
        Console.WriteLine("device returned");
        Console.ReadKey();
     }
