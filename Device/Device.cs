@@ -11,7 +11,7 @@ public abstract class Device
 
     public override string ToString()
     {
-        return "" + Id;
+        return Id + " " + get_type();
     }
 
     public abstract string get_type();
