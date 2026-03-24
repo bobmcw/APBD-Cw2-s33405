@@ -1,3 +1,5 @@
+using ConsoleApp1.Exceptions;
+
 namespace ConsoleApp1.RentalService;
 
 using User;
@@ -22,11 +24,16 @@ public class RentalService
                 throw new Exception("device is already rented");
             }
             var dev = items.First();
+            var rentCount = CurrentRents.Where(i => i.UserId() == user.Id).ToList().Count;
+            if (rentCount >= user.MaxRents())
+            {
+                throw new TooManyRentsException("user rented to many devices");
+            }
             CurrentRents.Add(new RentStatus(user, dev, returnDate));
         }
         else
         {
-            throw new Exception("element with such ID not found");
+            throw new NoSuchIdException("element with such ID not found");
         }
     }
 
