@@ -193,6 +193,26 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
         }
         Console.ReadKey();
     }
+
+    private void _displayRentsForUserForm()
+    {
+       Console.Clear();
+       Console.WriteLine("which user?");
+        int count = 1;
+        foreach (var tmpusr in _users)
+        {
+           Console.WriteLine(count++ + ". " + tmpusr); 
+        }
+        var key = (int) Char.GetNumericValue(Console.ReadKey().KeyChar);
+        var usr = _users[key - 1];
+        Console.Clear();
+        var rents = _service.CurrentRents.Where(i => i.UserId() == usr.Id).ToList();
+        foreach (var rent in rents)
+        {
+            Console.WriteLine(rent);
+        }
+        Console.ReadKey();
+    }
     
     public void Start()
     {
@@ -206,6 +226,7 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
            Console.WriteLine("4. return an item");
            Console.WriteLine("5. display inventory status");
            Console.WriteLine("6. display available devices");
+           Console.WriteLine("7. display current rents for user");
            var key = Console.ReadKey();
            switch (key.KeyChar)
            {
@@ -226,6 +247,9 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
                    break;
                case '6':
                    _displayAvailableDevices();
+                   break;
+               case '7':
+                   _displayRentsForUserForm();
                    break;
                default:
                    Console.Error.WriteLine("Invalid option");
