@@ -214,6 +214,16 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
         }
         Console.ReadKey();
     }
+
+    private void _displayRentHistory()
+    {
+        Console.Clear();
+        foreach (var rent in _service.History)
+        {
+            Console.WriteLine(rent.User + ": " + rent);
+        }
+        Console.ReadKey();
+    }
     
     public void Start()
     {
@@ -228,6 +238,7 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
            Console.WriteLine("5. display inventory status");
            Console.WriteLine("6. display available devices");
            Console.WriteLine("7. display current rents for user");
+           Console.WriteLine("8. display rent history");
            var key = Console.ReadKey();
            switch (key.KeyChar)
            {
@@ -251,6 +262,9 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
                    break;
                case '7':
                    _displayRentsForUserForm();
+                   break;
+               case '8':
+                   _displayRentHistory();
                    break;
                default:
                    Console.Error.WriteLine("Invalid option");
