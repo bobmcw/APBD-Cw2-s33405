@@ -14,5 +14,10 @@ public class User
         LastName = lastName;
         _type = type;
     }
+
+    public override string ToString()
+    {
+        return FirstName + " " + LastName;
+    }
     
 }
