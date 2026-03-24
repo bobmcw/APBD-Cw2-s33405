@@ -12,9 +12,12 @@ serv.AddDeviceToInventory(new Projector(3440, 1440, "Dell"));
 serv.AddDeviceToInventory(new Laptop("Intel", "Linux", "Lenovo"));
 serv.AddDeviceToInventory(new Camera(1000, 140, "Sony"));
 
-var tui = new Tui(serv);
 
-tui.InsertUser("Bob", "Kowalski", new EmployeeTier());
-tui.InsertUser("Michal", "Studencki", new StudentTier());
+var users = new List<User>();
+
+users.Add(new User("Bob", "Kowalski", new EmployeeTier()));
+users.Add(new User("Michal", "Studencki", new StudentTier()));
+
+var tui = new Tui(serv, users);
 
 tui.Start();
