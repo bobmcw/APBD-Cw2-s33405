@@ -13,10 +13,11 @@ serv.AddDeviceToInventory(new Laptop("Intel", "Linux", "Lenovo"));
 serv.AddDeviceToInventory(new Camera(1000, 140, "Sony"));
 
 
-var users = new List<User>();
-
-users.Add(new User("Bob", "Kowalski", new EmployeeTier()));
-users.Add(new User("Michal", "Studencki", new StudentTier()));
+var users = new List<User>
+{
+    new User("Bob", "Kowalski", new EmployeeTier()),
+    new User("Michal", "Studencki", new StudentTier())
+};
 
 var tui = new Tui(serv, users);
 
