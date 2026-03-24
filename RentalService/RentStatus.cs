@@ -56,6 +56,6 @@ public class RentStatus
 
     public override string ToString()
     {
-        return Device + _state.ToString();
+        return Device + " " + _state;
     }
 }
