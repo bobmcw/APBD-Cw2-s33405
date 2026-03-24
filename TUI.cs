@@ -1,4 +1,5 @@
 using System.Reflection;
+using ConsoleApp1.Exceptions;
 using ConsoleApp1.User;
 
 namespace ConsoleApp1;
@@ -106,9 +107,14 @@ public class Tui(RentalService.RentalService service, List<User.User>? users = n
             Console.WriteLine("device rented");
             Console.ReadKey();
         }
-        catch (Exception)
+        catch (NoSuchIdException ex)
         {
-            Console.Error.WriteLine("device is already rented");
+            Console.Error.WriteLine(ex.Message);
+            Console.ReadKey();
+        }
+        catch (TooManyRentsException ex)
+        {
+            Console.Error.WriteLine(ex.Message);
             Console.ReadKey();
         }
     }
